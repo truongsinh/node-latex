@@ -116,6 +116,8 @@ module.exports = function(doc, options) {
         cwd: dirpath,
         env: process.env
       });
+      tex.stdout.pipe(options.stdout || process.stdout);
+      tex.stderr.pipe(options.stderr || process.stderr);
       //Wait for LaTeX to finish its thing
       tex.on("exit", function(code, signal) {
         var output_file = path.join(dirpath, "texput." + format);
